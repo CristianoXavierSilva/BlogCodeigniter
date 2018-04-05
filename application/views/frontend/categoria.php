@@ -7,8 +7,18 @@
         <div class="col-md-8">
 
             <h1 class="page-header">
-                <?= $titulo.' - ' ?>
-                <small><?= $subtitulo ?></small>
+                <?= $titulo.' > ' ?>
+                <small>
+                    <?php 
+                        if($subtitulo != '') {
+                            echo $subtitulo;
+                        } else {
+                            foreach ($cat_titulo as $cat) {
+                                echo $cat->titulo;
+                            }
+                        }
+                    ?>
+                </small>
             </h1>
 
             <?php foreach ($postagem as $destaque) { ?>
