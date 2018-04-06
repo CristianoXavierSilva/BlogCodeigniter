@@ -7,8 +7,8 @@ class Sobre extends CI_Controller {
     public function __construct() {
         parent::__construct();
 
-        $this->load->model('categorias_model', 'modelcategorias');
         $this->load->model('usuarios_model', 'modelusuarios');
+        $this->load->model('categorias_model', 'modelcategorias');
         $this->categorias = $this->modelcategorias->getCategorias();
     }
 
