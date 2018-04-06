@@ -23,7 +23,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 | a PHP script and you can easily do that on your own.
 |
 */
-$config['base_url'] = 'http://localhost/blogcodeigniter';
+$config['base_url'] = 'http://localhost/blogcodeigniter'; //URL padrão do sistema
 
 /*
 |--------------------------------------------------------------------------
@@ -76,7 +76,7 @@ $config['url_suffix'] = '';
 | than english.
 |
 */
-$config['language']	= 'portugues';
+$config['language']	= 'portugues'; //Idioma das mensagens do framework
 
 /*
 |--------------------------------------------------------------------------
@@ -89,7 +89,7 @@ $config['language']	= 'portugues';
 | See http://php.net/htmlspecialchars for a list of supported charsets.
 |
 */
-$config['charset'] = 'UTF-8';
+$config['charset'] = 'UTF-8'; //decodificação para tratar os caracteres especiais
 
 /*
 |--------------------------------------------------------------------------
@@ -271,7 +271,7 @@ $config['log_file_permissions'] = 0644;
 | codes to set your own date formatting
 |
 */
-$config['log_date_format'] = 'Y-m-d H:i:s';
+$config['log_date_format'] = 'Y-m-d H:i:s'; //Formato da data a ser apresentada no sistema
 
 /*
 |--------------------------------------------------------------------------
@@ -377,11 +377,13 @@ $config['encryption_key'] = '';
 | except for 'cookie_prefix' and 'cookie_httponly', which are ignored here.
 |
 */
-$config['sess_driver'] = 'files';
-$config['sess_cookie_name'] = 'ci_session';
-$config['sess_expiration'] = 7200;
-$config['sess_save_path'] = NULL;
-$config['sess_match_ip'] = FALSE;
+
+/* Sistema de controle de sessão */
+$config['sess_driver'] = 'database'; //Define que os registros sessões serão guardas na base de dados
+$config['sess_cookie_name'] = 'ci_session'; //cookie da sessão
+$config['sess_expiration'] = 0; //tempo de expiração. No caso, com o valor zero, é definido que a sessão expira quando o usuário fecha o browser
+$config['sess_save_path'] = 'session'; //nome da tabela das sossões no banco
+$config['sess_match_ip'] = TRUE; //Habilita a detecção e registro do IP do usuário
 $config['sess_time_to_update'] = 300;
 $config['sess_regenerate_destroy'] = FALSE;
 

@@ -58,7 +58,10 @@ $autoload['packages'] = array();
 |
 |	$autoload['libraries'] = array('user_agent' => 'ua');
 */
-$autoload['libraries'] = array('database');
+
+//Com essas bibliotecas, o Codeigniter configura o sistema para uso de base de dados com o 'database'
+//E controle de sessão com o 'session'
+$autoload['libraries'] = array('database', 'session');
 
 /*
 | -------------------------------------------------------------------

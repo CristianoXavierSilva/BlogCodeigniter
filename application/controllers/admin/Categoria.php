@@ -9,6 +9,10 @@ class Categoria extends CI_Controller {
         
         $this->load->model('categorias_model', 'modelcategorias');
         $this->categorias = $this->modelcategorias->getCategorias();
+        
+        if(!$this->session->userdata('logado')) {
+            redirect(base_url('admin/login'));
+        }
     }
 
     public function index() {
