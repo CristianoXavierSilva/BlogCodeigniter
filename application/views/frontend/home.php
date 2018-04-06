@@ -16,7 +16,7 @@
                     <a href="<?= base_url('postagem/'.$destaque->id.'/'. limpar($destaque->titulo)) ?>"><?= $destaque->titulo ?></a>
                 </h2>
                 <p class="lead">
-                    por <a href="<?= base_url('autor/'.$destaque->id.'/'. limpar($destaque->nome)) ?>"><?= $destaque->nome ?></a>
+                    por <a href="<?= base_url('autor/'.$destaque->user.'/'. limpar($destaque->nome)) ?>"><?= $destaque->nome ?></a>
                 </p>
                 <p><span class="glyphicon glyphicon-time"></span> <?= postadoem($destaque->data) ?> </p>
                 <hr>
