@@ -36,7 +36,7 @@ class Usuarios_model extends CI_Model {
     
     public function getUsuario($id) {
         
-        $this->db->select('id, nome, historico, email, user');
+        $this->db->select('id, nome, historico, email, user, img');
         $this->db->from('usuario');
         $this->db->where('md5(id)', $id);
         
@@ -71,5 +71,13 @@ class Usuarios_model extends CI_Model {
         
         $this->db->where('md5(id)', $id);
         return $this->db->delete('usuario');
+    }
+    
+    public function updateFoto($id) {
+        
+        $dados['img'] = $id.'.jpg';
+        $this->db->where('md5(id)', $id);
+        
+        return $this->db->update('usuario', $dados);
     }
 }

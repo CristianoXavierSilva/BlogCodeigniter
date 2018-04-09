@@ -10,7 +10,7 @@
         <div class="col-lg-4">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <?= 'Atualizar ' . $subtitulo ?>
+                    <?= 'Adicionar novo ' . $subtitulo ?>
                 </div>
                 <div class="panel-body">
                     <div class="row">
@@ -33,7 +33,7 @@
                                 <label id="txt-historico"> Histórico </label>
                                 <textarea id="txt-historico" name="txt-historico" class="form-control" 
                                           placeholder="Digite o historico de usuário...">
-                                    <?= set_value('txt-historico') ?>
+                                              <?= set_value('txt-historico') ?>
                                 </textarea>
                             </div>
                             <div class="form-group">
@@ -49,8 +49,8 @@
                                 <label id="txt-confirm-senha"> Confirmar senha </label>
                                 <input id="txt-confirm-senha" name="txt-confirm-senha" type="password" class="form-control">
                             </div>                            
-                            
-                            <button type="submit" class="btn btn-default"> Atualizar </button>
+
+                            <button type="submit" class="btn btn-default"> Cadastrar </button>
                             <?php
                             echo form_close();
                             ?>
@@ -72,12 +72,20 @@
                 <div class="panel-body">
                     <div class="row">
                         <div class="col-lg-12">
+                            <style>
+                                img { width: 60px }
+                            </style>
                             <?php
-                            $this->table->set_heading("Foto", "Nome de usuário", "email","Alterar", "Excluir");
+                            $this->table->set_heading("Foto", "Nome de usuário", "email", "Alterar", "Excluir");
                             foreach ($usuarios as $usuario) {
 
+                                if ($usuario->img != null) {
+                                    $foto_user = img("assets/uploads/usuarios/" . $usuario->img);
+                                } else {
+                                    $foto_user = img("assets/frontend/img/semFoto.png");
+                                }
+
                                 $nome_user = $usuario->nome;
-                                $foto_user = "Foto";
                                 $email_user = $usuario->email;
                                 $alterar = anchor(base_url('admin/usuarios/atualizar/' . md5($usuario->id)), '<i class="fa fa-refresh fa-fw"></i> Alterar');
                                 $excluir = anchor(base_url('admin/usuarios/excluir/' . md5($usuario->id)), '<i class="fa fa-remove fa-fw"></i> Excluir');

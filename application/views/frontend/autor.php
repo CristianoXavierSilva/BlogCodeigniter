@@ -21,9 +21,18 @@
                 </small>
             </h1>
 
-            <?php foreach ($autores as $autor) { ?>
+            <?php
+            foreach ($autores as $autor) {
+
+                if ($autor->img != null) {
+                    $foto_user = "assets/uploads/usuarios/" . $autor->img;
+                } else {
+                    $foto_user = "assets/frontend/img/semFoto.png";
+                }
+                
+                ?>
                 <div class="col-md-4">
-                    <img class="img-responsive img-circle" src="http://placehold.it/200x200" alt="">
+                    <img class="img-responsive img-circle" src="<?= base_url($foto_user) ?>" alt="">
                 </div>
                 <div class="col-md-8 ">
                     <h2>

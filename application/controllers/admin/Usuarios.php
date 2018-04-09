@@ -92,20 +92,20 @@ class Usuarios extends CI_Controller {
         $this->form_validation->set_rules('txt-user', 'Usuário', 'required|min_length[3]|is_unique[usuario.user]');
         $this->form_validation->set_rules('txt-senha', 'Senha', 'required|min_length[3]');
         $this->form_validation->set_rules('txt-confirm-senha', 'Confirmar Senha', 'required|matches[txt-senha]');
-        
+
         if ($this->form_validation->run() == FALSE) {
-            
+
             $id = $this->input->post('txt-id');
             $this->atualizar(md5($id));
         } else {
-            
+
             $id = $this->input->post('txt-id');
             $nome = $this->input->post('txt-nome');
             $email = $this->input->post('txt-email');
             $historico = $this->input->post('txt-historico');
             $user = $this->input->post('txt-user');
             $senha = $this->input->post('txt-senha');
-            
+
             if ($this->modelusuarios->atualizar($id, $nome, $email, $historico, $user, $senha)) {
                 redirect(base_url('admin/usuarios'));
             } else {
@@ -124,6 +124,46 @@ class Usuarios extends CI_Controller {
             redirect(base_url('admin/usuarios'));
         } else {
             echo 'Erro ao tentar excluir a categoria...';
+        }
+    }
+
+    public function addFoto() {
+
+        if (!$this->session->userdata('logado')) {
+            redirect(base_url('admin/login'));
+        }
+
+        $id = $this->input->post('id');
+        $config['upload_path'] = './assets/uploads/usuarios';
+        $config['allowed_types'] = 'jpg';
+        $config['file_name'] = $id . 'jpg';
+        $config['overwrite'] = true;
+        $this->load->library('upload', $config);
+        
+        if (!$this->upload->do_upload()) {
+            echo $this->upload->display_errors();
+        } else {
+
+            $config2['image_library'] = 'gd2';
+            $config2['source_image'] = './assets/uploads/usuarios/' . $id . '.jpg';
+            $config2['create_thumb'] = false;
+            $config2['width'] = 200;
+            $config2['height'] = 200;
+            
+            $this->load->library('image_lib');
+            $this->image_lib->initialize($config2);
+            $this->image_lib->clear();
+
+            if ($this->image_lib->resize()) {
+
+                if ($this->modelusuarios->updateFoto($id)) {
+                    redirect(base_url('admin/usuarios/atualizar/' . $id));
+                } else {
+                    echo 'Erro ao tentar atualizar imagem...';
+                }
+            } else {
+                echo $this->image_lib->display_errors();
+            }
         }
     }
 

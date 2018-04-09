@@ -35,9 +35,20 @@
                 Nossos Autores
             </h1>
             <div class="col-md-12 row">
-                <?php foreach ($autores as $autor) { ?>
-                    <div class="col-md-4 col-xs-6">
-                        <img class="img-responsive img-circle" src="http://placehold.it/200x200" alt="">
+                <?php
+                foreach ($autores as $autor) {
+
+                    if ($autor->img != null) {
+                        $foto_user = "assets/uploads/usuarios/" . $autor->img;
+                    } else {
+                        $foto_user = "assets/frontend/img/semFoto.png";
+                    }
+                    ?>
+                    <div class="col-md-5 col-xs-6">
+                        <style>
+                            img { width: 200px; height: auto }
+                        </style>
+                        <img class="img-responsive img-circle" src="<?= base_url($foto_user) ?>" alt="">
                         <h4>
                             <a href="<?= base_url('autor/' . $autor->id . '/' . limpar($autor->nome)) ?>"> <?= $autor->nome ?> </a>
                         </h4>
