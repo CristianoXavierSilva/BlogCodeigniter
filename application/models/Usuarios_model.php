@@ -27,11 +27,49 @@ class Usuarios_model extends CI_Model {
     
     public function getAutores() {
         
-        $this->db->select('id, nome, img');
+        $this->db->select('id, nome, img, email');
         $this->db->from('usuario');
         $this->db->order_by('nome', 'ASC');
         
         return $this->db->get()->result();
     }
-}
+    
+    public function getUsuario($id) {
+        
+        $this->db->select('id, nome, historico, email, user');
+        $this->db->from('usuario');
+        $this->db->where('md5(id)', $id);
+        
+        return $this->db->get()->result();
+    }
+    
+    public function adicionar($nome, $email, $historico, $user, $senha) {
+        
+        $dados['nome'] = $nome;
+        $dados['email'] = $email;
+        $dados['historico'] = $historico;
+        $dados['user'] = $user;
+        $dados['senha'] = md5($senha);
+        
+        return $this->db->insert('usuario', $dados);
+    }
+    
+    public function atualizar($id, $nome, $email, $historico, $user, $senha) {
+        
+        $dados['id'] = $id;
+        $dados['nome'] = $nome;
+        $dados['email'] = $email;
+        $dados['historico'] = $historico;
+        $dados['user'] = $user;
+        $dados['senha'] = md5($senha);
+        $this->db->where('id', $id);
+        
+        return $this->db->update('usuario', $dados);
+    }
 
+        public function excluir($id) {
+        
+        $this->db->where('md5(id)', $id);
+        return $this->db->delete('usuario');
+    }
+}
