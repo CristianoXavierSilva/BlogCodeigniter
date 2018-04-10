@@ -30,8 +30,12 @@
                 </p>
                 <p><span class="glyphicon glyphicon-time"></span> <?= postadoem($destaque->data) ?> </p>
                 <hr>
-                <img class="img-responsive" src="http://placehold.it/900x300" alt="">
-                <hr>
+                <?php
+                    if ($destaque->img != null) {
+                        $foto_pub = base_url("assets/uploads/posts/" . $destaque->img); ?>
+                    <img class="img-responsive" src="<?= $foto_pub ?>" alt="<?= $destaque->titulo ?>">
+                    <hr>
+                <?php } ?>
                 <p><?= $destaque->subtitulo ?></p>
                 <a class="btn btn-primary" href="<?= base_url('postagem/'.$destaque->id.'/'. limpar($destaque->titulo)) ?>">Leia mais <span class="glyphicon glyphicon-chevron-right"></span></a>
 

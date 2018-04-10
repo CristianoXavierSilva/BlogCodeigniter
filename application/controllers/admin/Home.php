@@ -23,5 +23,4 @@ class Home extends CI_Controller {
         $this->load->view('backend/home');
         $this->load->view('backend/template/html-footer');
     }
-
 }

@@ -20,7 +20,7 @@
                             <a href="<?= base_url('admin/categoria')?>"><i class="fa fa-sitemap fa-fw"></i> Categorias</a>
                         </li>
                         <li>
-                            <a href="<?= base_url('admin/postagens')?>"><i class="fa fa-edit fa-fw"></i> Postagens</a>
+                            <a href="<?= base_url('admin/publicacao')?>"><i class="fa fa-edit fa-fw"></i> Postagens</a>
                         </li>
                         <li>
                             <a href="<?= base_url('admin/usuarios')?>"><i class="fa fa-wrench fa-fw"></i> Usuários</a>

@@ -16,8 +16,12 @@
                 <p><span class="glyphicon glyphicon-time"></span> <?= postadoem($destaque->data) ?> </p>
                 <hr>
                 <p><i><?= $destaque->subtitulo ?></i></p>
-                <img class="img-responsive" src="http://placehold.it/900x300" alt="">
-                <hr>
+                <?php
+                    if ($destaque->img != null) {
+                        $foto_pub = base_url("assets/uploads/posts/" . $destaque->img); ?>
+                    <img class="img-responsive" src="<?= $foto_pub ?>" alt="<?= $destaque->titulo ?>">
+                    <hr>
+                <?php } ?>
                 <p><?= $destaque->conteudo ?></p>
 
                 <hr>

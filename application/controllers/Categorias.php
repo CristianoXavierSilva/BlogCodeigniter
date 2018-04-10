@@ -6,14 +6,14 @@ class Categorias extends CI_Controller {
 
     public function __construct() {
         parent::__construct();
-
+        $this->load->helper('funcoes');
         $this->load->model('categorias_model', 'modelcategorias');
         $this->categorias = $this->modelcategorias->getCategorias();
     }
 
     public function index($id, $slug = null) {
 
-        $this->load->model('postagens_model', 'postagens');
+        $this->load->model('publicacoes_model', 'postagens');
          
         $dados['categorias'] = $this->categorias;
         $dados['postagem'] = $this->postagens->getCategoriaPublic($id);

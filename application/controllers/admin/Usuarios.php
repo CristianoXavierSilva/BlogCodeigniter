@@ -79,7 +79,7 @@ class Usuarios extends CI_Controller {
         $this->load->view('backend/template/html-footer');
     }
 
-    public function salvar() {
+    public function salvar($id) {
 
         if (!$this->session->userdata('logado')) {
             redirect(base_url('admin/login'));
@@ -96,7 +96,7 @@ class Usuarios extends CI_Controller {
         if ($this->form_validation->run() == FALSE) {
 
             $id = $this->input->post('txt-id');
-            $this->atualizar(md5($id));
+            $this->atualizar($id);
         } else {
 
             $id = $this->input->post('txt-id');

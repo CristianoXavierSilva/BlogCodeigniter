@@ -6,14 +6,14 @@ class Home extends CI_Controller {
 
     public function __construct() {
         parent::__construct();
-
+        $this->load->helper('funcoes');
         $this->load->model('categorias_model', 'modelcategorias');
         $this->categorias = $this->modelcategorias->getCategorias();
     }
 
     public function index() {
 
-        $this->load->model('postagens_model', 'postagens');
+        $this->load->model('publicacoes_model', 'postagens');
          
         $dados['categorias'] = $this->categorias;
         $dados['postagem'] = $this->postagens->getPostDestaques();
@@ -29,5 +29,4 @@ class Home extends CI_Controller {
         $this->load->view('frontend/template/footer');
         $this->load->view('frontend/template/html-footer');
     }
-
 }

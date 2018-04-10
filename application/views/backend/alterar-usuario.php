@@ -17,9 +17,9 @@
                         <div class="col-lg-12">
                             <?php
                             echo validation_errors('<div class="alert alert-danger">', '</div>');
-                            echo form_open('admin/usuarios/salvar');
-
                             foreach ($usuarios as $usuario) {
+                            echo form_open('admin/usuarios/salvar'.md5($usuario->id));
+                            
                                 ?>
                                 <div class="form-group">
                                     <label id="txt-nome"> Nome da categoria </label>
