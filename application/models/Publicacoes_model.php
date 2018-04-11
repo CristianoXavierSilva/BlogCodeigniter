@@ -29,7 +29,20 @@ class Publicacoes_model extends CI_Model {
         return $this->db->get()->result();
     }
 
-    public function getCategoriaPublic($id) {
+//    public function getCategoriaPublic($id) {
+//
+//        $this->db->select('usuario.id AS idautor, usuario.nome, postagens.id,'
+//                . 'postagens.titulo, postagens.subtitulo, postagens.user, '
+//                . 'postagens.data, postagens.img, postagens.categoria');
+//        $this->db->from('postagens');
+//        $this->db->join('usuario', 'usuario.id = postagens.user');
+//        $this->db->where('postagens.categoria =' . $id);
+//        $this->db->order_by('data', 'DESC');
+//
+//        return $this->db->get()->result();
+//    }
+    
+    public function getCategoriaPublic($id, $jump, $post_por_page) {
 
         $this->db->select('usuario.id AS idautor, usuario.nome, postagens.id,'
                 . 'postagens.titulo, postagens.subtitulo, postagens.user, '
@@ -38,6 +51,12 @@ class Publicacoes_model extends CI_Model {
         $this->db->join('usuario', 'usuario.id = postagens.user');
         $this->db->where('postagens.categoria =' . $id);
         $this->db->order_by('data', 'DESC');
+        
+        if($jump && $post_por_page) {
+            $this->db->limit($post_por_page, $jump);
+        } else {
+            $this->db->limit(2);
+        }
 
         return $this->db->get()->result();
     }
@@ -54,9 +73,22 @@ class Publicacoes_model extends CI_Model {
         return $this->db->get()->result();
     }
 
-    public function getPublics() {
+//    public function getPublics() {
+//
+//        $this->db->order_by('data', 'DESC');
+//        return $this->db->get('postagens')->result();
+//    }
+    
+    public function getPublics($pular = null, $post_por_page) {
 
         $this->db->order_by('data', 'DESC');
+        
+        if($pular && $post_por_page) {
+            $this->db->limit($post_por_page, $pular);
+        } else {
+            $this->db->limit(5);
+        }
+        
         return $this->db->get('postagens')->result();
     }
 
@@ -109,5 +141,15 @@ class Publicacoes_model extends CI_Model {
         $this->db->where('md5(id)', $id);
         
         return $this->db->update('postagens', $dados);
+    }
+    
+    public function count() {
+        return $this->db->count_all('postagens');
+    }
+    
+    public function countCat($id) {
+        
+        $this->db->where('categoria', $id);
+        return $this->db->count_all_results('postagens');
     }
 }

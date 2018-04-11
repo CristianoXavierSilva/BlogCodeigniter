@@ -11,12 +11,20 @@ class Categorias extends CI_Controller {
         $this->categorias = $this->modelcategorias->getCategorias();
     }
 
-    public function index($id, $slug = null) {
+    public function index($id, $name, $jump = null, $post_por_page = null) {
 
-        $this->load->model('publicacoes_model', 'postagens');
-         
+        $this->load->model('publicacoes_model', 'modelpost');
+        $this->load->library('pagination');
         $dados['categorias'] = $this->categorias;
-        $dados['postagem'] = $this->postagens->getCategoriaPublic($id);
+        
+        $post_por_page = 2;
+        $config['base_url'] = base_url("categoria/".$id."/".$name);
+        $config['total_rows'] = $this->modelpost->countCat($id);
+        $config['per_page'] = $post_por_page; 
+        $this->pagination->initialize($config);
+        
+        $dados['postagem'] = $this->modelpost->getCategoriaPublic($id, $jump, $post_por_page);
+        $dados['links_pagination'] = $this->pagination->create_links();
         
         //Informações a serem carregadas n cabeçalho
         $dados['site_titulo'] = 'Categorias';

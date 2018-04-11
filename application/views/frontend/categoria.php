@@ -40,5 +40,7 @@
                 <a class="btn btn-primary" href="<?= base_url('postagem/'.$destaque->id.'/'. limpar($destaque->titulo)) ?>">Leia mais <span class="glyphicon glyphicon-chevron-right"></span></a>
 
                 <hr>
-            <?php } ?>
+            <?php } 
+                echo "<div class='paginacao'>".$links_pagination."</div>";
+            ?>
         </div>
