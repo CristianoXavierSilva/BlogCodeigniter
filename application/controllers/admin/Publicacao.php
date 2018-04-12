@@ -15,7 +15,7 @@ class Publicacao extends CI_Controller {
         $this->categorias = $this->modelcategorias->getCategorias();
     }
 
-    public function index($pular = null, $post_por_page = null) {
+    public function index($pular = null, $post_por_page = null, $publicado = null) {
 
         $this->load->library('table');
         $this->load->library('pagination');
@@ -33,6 +33,7 @@ class Publicacao extends CI_Controller {
         //Informações a serem carregadas n cabeçalho
         $dados['titulo'] = 'Painel Administrativo';
         $dados['subtitulo'] = 'Publicação';
+        $dados['publicado'] = $publicado;
 
         $this->load->view('backend/template/html-header', $dados);
         $this->load->view('backend/template/template');

@@ -9,7 +9,7 @@ class Usuarios extends CI_Controller {
         $this->load->model('usuarios_model', 'modelusuarios');
     }
 
-    public function index() {
+    public function index($publicado = null) {
 
         if (!$this->session->userdata('logado')) {
             redirect(base_url('admin/login'));
@@ -21,7 +21,8 @@ class Usuarios extends CI_Controller {
         //Informações a serem carregadas n cabeçalho
         $dados['titulo'] = 'Painel Administrativo';
         $dados['subtitulo'] = 'Usuários';
-
+        $dados['publicado'] = $publicado;
+        
         $this->load->view('backend/template/html-header', $dados);
         $this->load->view('backend/template/template');
         $this->load->view('backend/usuarios');

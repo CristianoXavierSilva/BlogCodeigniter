@@ -16,6 +16,10 @@
                     <div class="row">
                         <div class="col-lg-12">
                             <?php
+                            if($publicado == 1) {
+                                echo "<div class='alert alert-success'> Item adicionado! </div>";
+                            }
+                            
                             echo validation_errors('<div class="alert alert-danger">', '</div>');
                             echo form_open('admin/usuarios/inserir');
                             ?>
@@ -88,7 +92,30 @@
                                 $nome_user = $usuario->nome;
                                 $email_user = $usuario->email;
                                 $alterar = anchor(base_url('admin/usuarios/atualizar/' . md5($usuario->id)), '<i class="fa fa-refresh fa-fw"></i> Alterar');
-                                $excluir = anchor(base_url('admin/usuarios/excluir/' . md5($usuario->id)), '<i class="fa fa-remove fa-fw"></i> Excluir');
+                                $excluir= '<button type="button" class="btn btn-link" data-toggle="modal" data-target=".excluir-modal-'.$usuario->id.'"><i class="fa fa-remove fa-fw"></i> Excluir</button>';
+
+                                echo $modal= ' <div class="modal fade excluir-modal-'.$usuario->id.'" tabindex="-1" role="dialog" aria-hidden="true">
+                                    <div class="modal-dialog modal-sm">
+                                        <div class="modal-content">
+
+                                            <div class="modal-header">
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span>
+                                                </button>
+                                                <h4 class="modal-title" id="myModalLabel2">Exclusão de Categoria</h4>
+                                            </div>
+                                            <div class="modal-body">
+                                                <h4>Deseja Excluir a Categoria '.$usuario->nome.'?</h4>
+                                                <p>Após Excluida a usuario <b>'.$usuario->nome.'</b> não ficara mais disponível no Sistema.</p>
+                                                <p>Todos os itens relacionados a usuario <b>'.$usuario->nome.'</b> serão afetados e não aparecerão no site até que sejam editados.</p>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                                                <a type="button" class="btn btn-primary" href="'.base_url("admin/usuarios/excluir/".md5($usuario->id)).'">Excluir</a>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>';
 
                                 $this->table->add_row($foto_user, $nome_user, $email_user, $alterar, $excluir);
                             }

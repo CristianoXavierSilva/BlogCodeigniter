@@ -15,14 +15,15 @@ class Categoria extends CI_Controller {
         }
     }
 
-    public function index() {
+    public function index($publicado = null) {
 
         $this->load->library('table');
         $dados['categorias'] = $this->categorias;
         //Informações a serem carregadas n cabeçalho
         $dados['titulo'] = 'Painel Administrativo';
         $dados['subtitulo'] = 'Categoria';
-
+        $dados['publicado'] = $publicado;
+        
         $this->load->view('backend/template/html-header', $dados);
         $this->load->view('backend/template/template');
         $this->load->view('backend/categoria');
@@ -38,7 +39,7 @@ class Categoria extends CI_Controller {
         } else {
             $titulo = $this->input->post('txt-categoria');
             if ($this->modelcategorias->adicionar($titulo)) {
-                redirect(base_url('admin/categoria'));
+                redirect(base_url('admin/categoria/1'));
             } else {
                 echo 'Erro ao tentar adicionar nova categoria...';
             }

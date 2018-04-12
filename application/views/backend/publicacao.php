@@ -16,6 +16,10 @@
                     <div class="row">
                         <div class="col-lg-12">
                             <?php
+                            if($publicado == 1) {
+                                echo "<div class='alert alert-success'> Item adicionado! </div>";
+                            }
+                            
                             echo validation_errors('<div class="alert alert-danger">', '</div>');
                             echo form_open('admin/publicacao/inserir');
                             ?>
@@ -91,7 +95,30 @@
                                 $data = postadoem($publicacao->data);
 
                                 $alterar = anchor(base_url('admin/publicacao/atualizar/' . md5($publicacao->id)), '<i class="fa fa-refresh fa-fw"></i> Alterar');
-                                $excluir = anchor(base_url('admin/publicacao/excluir/' . md5($publicacao->id)), '<i class="fa fa-remove fa-fw"></i> Excluir');
+                                $excluir= '<button type="button" class="btn btn-link" data-toggle="modal" data-target=".excluir-modal-'.$publicacao->id.'"><i class="fa fa-remove fa-fw"></i> Excluir</button>';
+
+                                echo $modal= ' <div class="modal fade excluir-modal-'.$publicacao->id.'" tabindex="-1" role="dialog" aria-hidden="true">
+                                    <div class="modal-dialog modal-sm">
+                                        <div class="modal-content">
+
+                                            <div class="modal-header">
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span>
+                                                </button>
+                                                <h4 class="modal-title" id="myModalLabel2">Exclusão de Categoria</h4>
+                                            </div>
+                                            <div class="modal-body">
+                                                <h4>Deseja Excluir a Categoria '.$publicacao->titulo.'?</h4>
+                                                <p>Após Excluida a publicação <b>'.$publicacao->titulo.'</b> não ficara mais disponível no Sistema.</p>
+                                                <p>Todos os itens relacionados a publicacao <b>'.$publicacao->titulo.'</b> serão afetados e não aparecerão no site até que sejam editados.</p>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                                                <a type="button" class="btn btn-primary" href="'.base_url("admin/publicacao/excluir/".md5($publicacao->id)).'">Excluir</a>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>';
 
                                 $this->table->add_row($foto_pub, $titulo, $data, $alterar, $excluir);
                             }
