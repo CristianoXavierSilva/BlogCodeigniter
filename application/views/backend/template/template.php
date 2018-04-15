@@ -26,7 +26,7 @@
                             <a href="<?= base_url('admin/usuarios')?>"><i class="fa fa-wrench fa-fw"></i> Usuários</a>
                         </li>
                         <li>
-                            <a href="<?= base_url('admin/usuarios/logout')?>"><i class="fa fa-sign-out fa-fw"></i> Sair do Sistema</a>
+                            <a href="<?= base_url('admin/login/logout')?>"><i class="fa fa-sign-out fa-fw"></i> Sair do Sistema</a>
                         </li>
                     </ul>
                 </div>
