@@ -25,7 +25,7 @@ class Usuarios extends CI_Controller {
         
         $this->load->view('backend/template/html-header', $dados);
         $this->load->view('backend/template/template');
-        $this->load->view('backend/auth/usuarios');
+        $this->load->view('backend/usuarios');
         $this->load->view('backend/template/html-footer');
     }
 

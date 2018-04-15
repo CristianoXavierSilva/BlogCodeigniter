@@ -13,14 +13,12 @@ class Auth {
         }
 
         $controller = $CI->uri->segment(1);
-
         if ($controller == 'admin') {
 
             $action = $CI->uri->segment(2);
-
-            if ($action != 'auth') {
+            if ($action != 'login') {
                 if (!$CI->session->userdata('logado')) {
-                    redirect(base_url('admin/auth/login', 'location', 302));
+                    redirect(base_url('admin/login', 'location', 302));
                 }
             }
         }
