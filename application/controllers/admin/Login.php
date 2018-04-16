@@ -26,7 +26,7 @@ class Login extends CI_Controller {
         $this->form_validation->set_rules('txt-user', 'Usuário', 'required|min_length[3]');
         $this->form_validation->set_rules('txt-pass', 'Senha', 'required|min_length[3]');
         if ($this->form_validation->run() == FALSE) {
-            $this->pagLogin();
+            $this->logar();
         } else {
 
             $usuario = $this->input->post('txt-user');
