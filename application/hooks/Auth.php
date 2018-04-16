@@ -6,22 +6,22 @@ class Auth {
 
     public function check() {
 
-        $CI = &get_instance();
+        $system = &get_instance();
 
-        if (!isset($CI->session)) {
-            $CI->load->library('session');
+        if (!isset($system->session)) {
+            $system->load->library('session');
         }
 
-        $controller = $CI->uri->segment(1);
+        $controller = $system->uri->segment(1);
         if ($controller == 'admin') {
-
-            $action = $CI->uri->segment(2);
+            
+            $action = $system->uri->segment(2);
             if ($action != 'login') {
-                if (!$CI->session->userdata('logado')) {
-                    redirect(base_url('admin/login', 'location', 302));
+                if (!$system->session->userdata('logado')) {
+                    redirect(base_url('admin/login'));
+                    exit;
                 }
             }
         }
     }
-
 }
