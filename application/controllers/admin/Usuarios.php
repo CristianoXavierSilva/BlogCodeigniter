@@ -11,10 +11,6 @@ class Usuarios extends CI_Controller {
 
     public function index($publicado = null) {
 
-        if (!$this->session->userdata('logado')) {
-            redirect(base_url('admin/login'));
-        }
-
         $this->load->library('table');
         $dados['usuarios'] = $this->modelusuarios->getAutores();
 
@@ -30,10 +26,6 @@ class Usuarios extends CI_Controller {
     }
 
     public function inserir() {
-
-        if (!$this->session->userdata('logado')) {
-            redirect(base_url('admin/login'));
-        }
 
         $this->load->model('usuarios_model', 'modelusuarios');
         $this->load->library('form_validation');
@@ -64,10 +56,6 @@ class Usuarios extends CI_Controller {
 
     public function atualizar($id) {
 
-        if (!$this->session->userdata('logado')) {
-            redirect(base_url('admin/login'));
-        }
-
         $dados['usuarios'] = $this->modelusuarios->getUsuario($id);
 
         //Informações a serem carregadas n cabeçalho
@@ -81,10 +69,6 @@ class Usuarios extends CI_Controller {
     }
 
     public function salvar($id) {
-
-        if (!$this->session->userdata('logado')) {
-            redirect(base_url('admin/login'));
-        }
 
         $this->load->library('form_validation');
         $this->form_validation->set_rules('txt-nome', 'Nome do Usuário', 'required|min_length[3]');
@@ -117,10 +101,6 @@ class Usuarios extends CI_Controller {
 
     public function excluir($id) {
 
-        if (!$this->session->userdata('logado')) {
-            redirect(base_url('admin/login'));
-        }
-
         if ($this->modelusuarios->excluir($id)) {
             redirect(base_url('admin/usuarios'));
         } else {
@@ -129,10 +109,6 @@ class Usuarios extends CI_Controller {
     }
 
     public function addFoto() {
-
-        if (!$this->session->userdata('logado')) {
-            redirect(base_url('admin/login'));
-        }
 
         $id = $this->input->post('id');
         $config['upload_path'] = './assets/uploads/usuarios';

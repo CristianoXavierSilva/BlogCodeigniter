@@ -6,10 +6,6 @@ class Publicacao extends CI_Controller {
 
     public function __construct() {
         parent::__construct();
-        if (!$this->session->userdata('logado')) {
-            redirect(base_url('admin/login'));
-        }
-
         $this->load->model('categorias_model', 'modelcategorias');
         $this->load->model('publicacoes_model', 'modelpost');
         $this->categorias = $this->modelcategorias->getCategorias();
@@ -117,10 +113,6 @@ class Publicacao extends CI_Controller {
     }
 
     public function addFoto() {
-
-        if (!$this->session->userdata('logado')) {
-            redirect(base_url('admin/login'));
-        }
 
         $id = $this->input->post('id');
         $config['upload_path'] = './assets/uploads/posts';
